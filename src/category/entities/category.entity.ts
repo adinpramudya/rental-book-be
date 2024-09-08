@@ -28,10 +28,10 @@ export class Category {
   @Column({ default: false })
   isActive: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   createdBy: string;
 
-  @Column()
+  @Column({ nullable: true })
   updatedBy: string;
 
   @OneToMany(() => Book, (book) => book.category)
