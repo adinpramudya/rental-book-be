@@ -10,3 +10,4 @@ export const ApiUser = 'users';
 export const ApiRole = 'roles';
 export const ApiMember = 'members';
 export const ApiCategory = 'categories';
+export const ApiPublisher = 'publishers';

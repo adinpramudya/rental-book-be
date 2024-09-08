@@ -67,7 +67,7 @@ export class CategoryService {
       );
     } catch (e) {
       throw new InternalServerErrorException(
-        'An error occurred while retrieving users',
+        'An error occurred while retrieving categories',
       );
     }
   }

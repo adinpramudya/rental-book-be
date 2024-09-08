@@ -67,7 +67,7 @@ export class MemberService {
       );
     } catch (error) {
       throw new InternalServerErrorException(
-        'An error occurred while retrieving users',
+        'An error occurred while retrieving members',
       );
     }
   }

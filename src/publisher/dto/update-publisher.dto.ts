@@ -5,4 +5,7 @@ import { IsOptional } from 'class-validator';
 export class UpdatePublisherDto extends PartialType(CreatePublisherDto) {
   @IsOptional()
   name?: string;
+  @IsOptional()
+  address?: string;
+  updatedBy: string;
 }
