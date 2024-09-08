@@ -71,7 +71,6 @@ export class UserService {
         },
       );
     } catch (err) {
-      console.log(err);
       throw new InternalServerErrorException(
         'An error occurred while retrieving users',
       );

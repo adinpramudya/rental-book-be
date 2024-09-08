@@ -10,6 +10,7 @@ import {
   UploadedFile,
   Req,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { MemberService } from './member.service';
 import { CreateMemberDto } from './dto/create-member.dto';
@@ -24,6 +25,7 @@ import { RolesGuard } from 'src/guard/roles.guard';
 import { diskStorage } from 'multer';
 import * as path from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import { PageableDto } from 'src/common/dto/pageable.dto';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN')
 @Controller(ApiMaster)
@@ -63,16 +65,16 @@ export class MemberController {
   }
 
   @Get(ApiMember)
-  findAll() {
-    return this.memberService.findAll();
+  findAll(@Query() query: PageableDto) {
+    return this.memberService.findAll(query);
   }
 
-  @Get(ApiMember + ':id')
+  @Get(ApiMember + '/:id')
   findOne(@Param('id') id: string) {
-    return this.memberService.findOne(+id);
+    return this.memberService.findOne(id);
   }
 
-  @Patch(ApiMember + ':id')
+  @Patch(ApiMember + '/:id')
   @UseInterceptors(
     FileInterceptor('profilePhoto', {
       storage: diskStorage({
@@ -99,13 +101,13 @@ export class MemberController {
 
     // Ambil email dari JWT payload
     const user = request.user as JwtPayload;
-    updateMemberDto.createdBy = user.email;
+    updateMemberDto.updatedBy = user.email;
     updateMemberDto.profilePhoto = profilePhotoPath; // Simpan path photo ke database
-    return this.memberService.update(+id, updateMemberDto);
+    return this.memberService.update(id, updateMemberDto);
   }
 
-  @Delete(ApiMember + ':id')
+  @Delete(ApiMember + '/:id')
   remove(@Param('id') id: string) {
-    return this.memberService.remove(+id);
+    return this.memberService.remove(id);
   }
 }
