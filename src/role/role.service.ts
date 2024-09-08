@@ -1,9 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { Role } from './entities/role.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PageableDto } from 'src/common/dto/pageable.dto';
+import { ApiResponse } from 'src/common/ApiResponse/api-response';
 
 @Injectable()
 export class RoleService {
@@ -16,7 +22,47 @@ export class RoleService {
     return this.roleRepository.save(role);
   }
 
-  findAll() {
+  async findAll(query: PageableDto) {
+    const {
+      page = 1,
+      direction = 'ASC',
+      search,
+      size = 10,
+      sortBy = 'id',
+    } = query;
+    try {
+      const take = size;
+      const skip = (page - 1) * size;
+      const whereOptions = search
+        ? {
+            name: ILike(`%${search}%`),
+          }
+        : {};
+      const [roles, total] = await this.roleRepository.findAndCount({
+        where: whereOptions,
+        order: {
+          [sortBy]: direction,
+        },
+        skip,
+        take,
+      });
+      return new ApiResponse<Role[]>(
+        200,
+        'Successfully found data',
+        new Date(),
+        roles,
+        {
+          page,
+          limit: size,
+          totalPage: Math.ceil(total / size),
+          totalData: total,
+        },
+      );
+    } catch (e) {
+      throw new InternalServerErrorException(
+        'An error occurred while retrieving users',
+      );
+    }
     return this.roleRepository.find();
   }
   async findOne(id: number) {

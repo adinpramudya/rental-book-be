@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Req,
+  Query,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -18,6 +19,7 @@ import { RolesGuard } from 'src/guard/roles.guard';
 import { Request } from 'express';
 import { JwtPayload } from 'src/auth/interfaces/jwt-payload.interface';
 import { Roles } from 'src/decorators/roles.decorator';
+import { PageableDto } from 'src/common/dto/pageable.dto';
 
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles('SUPER_ADMIN')
@@ -33,8 +35,8 @@ export class RoleController {
   }
 
   @Get(ApiRole)
-  findAll() {
-    return this.roleService.findAll();
+  findAll(@Query() query: PageableDto) {
+    return this.roleService.findAll(query);
   }
 
   @Get(ApiRole + '/:id')
