@@ -42,4 +42,6 @@ export class CreateBookDto {
 
   @IsNotEmpty({ message: 'Category Buku tidak boleh kosong' })
   category: Category;
+
+  createdBy: string;
 }

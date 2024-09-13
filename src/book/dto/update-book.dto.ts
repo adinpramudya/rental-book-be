@@ -44,4 +44,6 @@ export class UpdateBookDto extends PartialType(CreateBookDto) {
 
   @IsOptional()
   category: Category;
+
+  updatedBy: string;
 }
