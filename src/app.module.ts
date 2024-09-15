@@ -18,6 +18,7 @@ import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { BorrowModule } from './borrow/borrow.module';
 import { TransactionModule } from './transaction/transaction.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { TransactionModule } from './transaction/transaction.module';
     UploadModule,
     BorrowModule,
     TransactionModule,
+    ReviewModule,
   ],
   providers: [
     {

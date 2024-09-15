@@ -1,4 +1,5 @@
 import { Borrow } from 'src/borrow/entities/borrow.entity';
+import { Review } from 'src/review/entities/review.entity';
 import {
   Column,
   CreateDateColumn,
@@ -45,4 +46,7 @@ export class Member {
 
   @OneToMany(() => Borrow, (borrows) => borrows.member)
   borrows: Borrow[];
+
+  @OneToMany(() => Review, (review) => review.member)
+  reviews: Review[];
 }

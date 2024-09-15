@@ -1,11 +1,13 @@
 import { Category } from 'src/category/entities/category.entity';
 import { BookStatus } from 'src/enum/BookState';
 import { Publisher } from 'src/publisher/entities/publisher.entity';
+import { Review } from 'src/review/entities/review.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -72,4 +74,7 @@ export class Book {
 
   @Column()
   updatedBy: string;
+
+  @OneToMany(() => Review, (review) => review.book)
+  reviews: Review[];
 }
