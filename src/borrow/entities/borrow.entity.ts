@@ -1,9 +1,11 @@
 import { Member } from 'src/member/entities/member.entity';
+import { Transaction } from 'src/transaction/entities/transaction.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -48,4 +50,7 @@ export class Borrow {
 
   @Column()
   updatedBy: string;
+
+  @OneToOne(() => Transaction, (transaction) => transaction.borrow)
+  transaction: Transaction;
 }

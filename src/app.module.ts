@@ -17,6 +17,7 @@ import { Member } from './member/entities/member.entity';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
 import { BorrowModule } from './borrow/borrow.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -54,6 +55,7 @@ import { BorrowModule } from './borrow/borrow.module';
     AuthModule,
     UploadModule,
     BorrowModule,
+    TransactionModule,
   ],
   providers: [
     {

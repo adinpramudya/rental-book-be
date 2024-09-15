@@ -13,3 +13,4 @@ export const ApiCategory = 'categories';
 export const ApiPublisher = 'publishers';
 export const ApiBook = 'books';
 export const ApiBorrow = 'borrows';
+export const ApiTransaction = 'transactions';
