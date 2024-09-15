@@ -1,7 +1,9 @@
+import { Borrow } from 'src/borrow/entities/borrow.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -40,4 +42,7 @@ export class Member {
 
   @Column({ nullable: true })
   profilePhoto: string;
+
+  @OneToMany(() => Borrow, (borrows) => borrows.member)
+  borrows: Borrow[];
 }

@@ -12,3 +12,4 @@ export const ApiMember = 'members';
 export const ApiCategory = 'categories';
 export const ApiPublisher = 'publishers';
 export const ApiBook = 'books';
+export const ApiBorrow = 'borrows';

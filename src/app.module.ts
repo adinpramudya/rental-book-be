@@ -16,6 +16,7 @@ import { Publisher } from './publisher/entities/publisher.entity';
 import { Member } from './member/entities/member.entity';
 import { AuthModule } from './auth/auth.module';
 import { UploadModule } from './upload/upload.module';
+import { BorrowModule } from './borrow/borrow.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { UploadModule } from './upload/upload.module';
     PublisherModule,
     AuthModule,
     UploadModule,
+    BorrowModule,
   ],
   providers: [
     {
